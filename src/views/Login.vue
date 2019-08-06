@@ -6,9 +6,12 @@
     </header>
     <main>
       <div class='form-group'>
-        <input type='text' v-model='email' placeholder='email'/>
-        <input type='password' v-model='password' placeholder='password'/>
+        <input type='text' v-model='email' placeholder='email' :class="(emailError) ? 'err' : ''"/>
+        <input type='password' v-model='password' placeholder='password' :class="(passError) ? 'err' : ''"/>
         <button class='login-btn' @click='login'>Login</button>
+        <div class='error_msg' v-if='hasErrors'>
+          {{ error }}
+        </div>
       </div>
     </main>
     <footer>
@@ -25,7 +28,11 @@
     data () {
       return {
         email: '',
-        password: ''
+        password: '',
+        hasErrors: false,
+        emailError: false,
+        passError: false,
+        error: ''
       }
     },
     methods: {
@@ -42,7 +49,19 @@
             localStorage.setItem('jwt', response.data.token)
             this.$router.push('/')
           } else {
-            console.log('Error ', response)
+            console.log(response)
+            if (response.data.mailError) {
+              this.emailError = true
+            } else {
+              this.emailError = false
+            }
+            if (response.data.passError) {
+              this.passError = true
+            } else {
+              this.passError = false
+            }
+            this.error = response.data.msg
+            this.hasErrors = true
           }
         }).catch(err => {
           console.log('Error ', err)
