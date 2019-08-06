@@ -10,7 +10,7 @@
         <input type='text' v-model='lastname' placeholder='last name' />
         <input type='text' v-model='email' placeholder='email'/>
         <input type='password' v-model='password' placeholder='password'/>
-        <button class='login-btn'>Register</button>
+        <button class='login-btn' @click='register'>Register</button>
       </div>
     </main>
     <footer>
@@ -30,6 +30,30 @@
         lastname: '',
         email: '',
         password: ''
+      }
+    },
+    methods: {
+      register () {
+        let api_url = this.$store.state.api_url
+        // change alert to something else
+        if (this.firstname == '' ||
+            this.lastname == '' ||
+            this.email == '' ||
+            this.password == ''
+         ) {
+            return alert('Please fill in all fields')
+           }
+
+        this.$http.post(api_url + 'user/register', {
+          firstname: this.firstname,
+          lastname: this.lastname,
+          email: this.email,
+          password: this.password
+        }).then(response => {
+          console.log(response)
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }
