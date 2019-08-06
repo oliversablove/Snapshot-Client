@@ -42,10 +42,10 @@
             localStorage.setItem('jwt', response.data.token)
             this.$router.push('/')
           } else {
-            alert('Error')
+            console.log('Error ', response)
           }
         }).catch(err => {
-          console.log(err)
+          console.log('Error ', err)
         })
       }
     }

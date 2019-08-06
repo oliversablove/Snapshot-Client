@@ -11,6 +11,9 @@
         <input type='text' v-model='email' placeholder='email'/>
         <input type='password' v-model='password' placeholder='password'/>
         <button class='login-btn' @click='register'>Register</button>
+        <div class='error_msg' v-if='hasErrors'>
+          {{ error }}
+        </div>
       </div>
     </main>
     <footer>
@@ -29,7 +32,9 @@
         firstname: '',
         lastname: '',
         email: '',
-        password: ''
+        password: '',
+        hasErrors: false,
+        error: ''
       }
     },
     methods: {
@@ -50,9 +55,16 @@
           email: this.email,
           password: this.password
         }).then(response => {
-          console.log(response)
+          if (response.data.auth) {
+            localStorage.setItem('jwt', response.data.token)
+            this.$router.push('/')
+          } else {
+            this.error = response.data.msg
+            this.hasErrors = true
+          }
         }).catch(err => {
-          console.log(err)
+          this.hasErrors = true
+          this.error = err
         })
       }
     }
