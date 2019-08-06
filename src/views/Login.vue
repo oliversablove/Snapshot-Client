@@ -2,6 +2,7 @@
   <div class='login-page'>
     <header>
       <h3>Snap<span>shot</span></h3>
+      <h4>Login</h4>
     </header>
     <main>
       <div class='form-group'>
@@ -38,14 +39,25 @@
   box-sizing: border-box;
 
   header {
+    padding: 15px 25px;
     h3 {
       color: #171717;
       font-size: 28px;
       text-align: center;
       font-weight: 900;
+      margin: 0;
       span {
         font-weight: 300;
       }
+    }
+
+    h4 {
+      color: #888;
+      font-size: 24px;
+      text-align: center;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
     }
   }
 
