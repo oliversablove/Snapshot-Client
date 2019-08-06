@@ -8,7 +8,7 @@
       <div class='form-group'>
         <input type='text' v-model='firstname' placeholder='first name' />
         <input type='text' v-model='lastname' placeholder='last name' />
-        <input type='text' v-model='email' placeholder='email'/>
+        <input type='text' v-model='email' placeholder='email' :class="(hasErrors) ? 'err' : ''"/>
         <input type='password' v-model='password' placeholder='password'/>
         <button class='login-btn' @click='register'>Register</button>
         <div class='error_msg' v-if='hasErrors'>
@@ -117,6 +117,11 @@
       background: #eee;
       outline: none;
 
+      &.err {
+        background: rgba(255, 0, 0, 0.2);
+        border: 1px solid #af1e2d;
+      }
+
       &:focus {
         border: 1px solid #aaa;
       }
@@ -134,6 +139,15 @@
       color: #171717;
       font-size: 18px;
       font-weight: 500;
+    }
+    .error_msg {
+      margin: 15px 0px;
+      padding: 10px;
+      background-color: rgba(255, 0, 0, 0.2);
+      color: #171717;
+      font-weight: 700;
+      border-radius: 8px;
+      text-align: center;
     }
   }
 
