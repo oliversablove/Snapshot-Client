@@ -8,7 +8,7 @@
       <div class='form-group'>
         <input type='text' v-model='email' placeholder='email'/>
         <input type='password' v-model='password' placeholder='password'/>
-        <button class='login-btn'>Login</button>
+        <button class='login-btn' @click='login'>Login</button>
       </div>
     </main>
     <footer>
@@ -26,6 +26,27 @@
       return {
         email: '',
         password: ''
+      }
+    },
+    methods: {
+      login () {
+        let api_url = this.$store.state.api_url
+        // change alert to something else
+        if (this.email == '' || this.password == '') return alert('Please fill in all fields')
+
+        this.$http.post(api_url + 'user/login', {
+          email: this.email,
+          password: this.password
+        }).then(response => {
+          if (response.data.auth) {
+            localStorage.setItem('jwt', response.data.token)
+            this.$router.push('/')
+          } else {
+            alert('Error')
+          }
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }
