@@ -12,6 +12,10 @@ export default new Vuex.Store({
   },
   mutations: {
     getFeed (state, feed) {
+      // sort feed on front-end
+      // feed = feed.sort(function (a, b) {
+      //   return b.timestamp - a.timestamp
+      // })
       state.feed = feed
     },
     isAuthenticated (state) {
