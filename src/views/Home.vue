@@ -1,5 +1,5 @@
 <template>
-  <main class="feed">
+  <main class="view feed">
 
     <article class="post" v-for="post in feed" :key="post.id">
       <section class="post-user">{{ post.display_name }}</section>
