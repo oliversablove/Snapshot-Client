@@ -3,6 +3,8 @@
   height: 40px;
   background-color: #eee;
   border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 0;
 
   .title {
     margin: 0;
@@ -13,7 +15,7 @@
     text-align: center;
     font-weight: 900;
   }
-  
+
   span {
     font-weight: 300;
   }
