@@ -3,6 +3,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  background-color: #eee;
 
   height: 40px;
 
@@ -21,11 +22,12 @@ button {
   background: none;
 }
 
+// works on header icon too; technically global
 .material-icons {
   font-size: 26px;
 
   &:hover {
     transition: 0.2s;
-    color: #ff0000;
+    color: #b0b0b0;
   }
 }
