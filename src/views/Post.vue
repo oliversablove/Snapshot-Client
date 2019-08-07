@@ -2,11 +2,16 @@
   <main class ="view post">
     <section class="stream">
       <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'"></video>
-      <button class="capture-btn" @click="capture" :class="(!captured) ? 'show' : 'hide'">Capture</button>
-      <button class="cancel-btn" @click="cancel" :class="(captured) ? 'show' : 'hide'">Retake</button>
+      <div class="post-btns">
+        <button class="capture-btn" @click="capture" v-if="!captured">Capture</button>
+        <button class="cancel-btn" @click="cancel" v-if="captured">Retake</button>
+        <button class="upload-btn" @click="upload" v-if="captured">Upload</button>
+      </div>
     </section>
-    <section class="capture">
-      <canvas ref="canvas" id="canvas" width="100%" height="300" :class="(captured) ? 'show' : 'hide'"></canvas>
+    <section :class="(captured) ? 'show' : 'hide'">
+      <canvas ref="canvas" id="canvas" width="100%" height="300"></canvas>
+      <label for="desc">Caption</label>
+      <input type="text" id="desc" name="desc" v-model="desc" />
     </section>
   </main>
 </template>
@@ -25,13 +30,27 @@ export default {
   },
   methods: {
     capture () {
-      let context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width,
+      this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width,
       this.canvas.width)
-      this.cap = canvas.toDataURL("image/png")
+      this.cap = this.canvas.toDataURL("image/png")
       this.captured = true
     },
     cancel () {
       this.captured = false
+    },
+    upload () {
+      let api_url = this.$store.state.api_url
+
+      this.$http.post(api_url + 'post/newpost', {
+        auth_token: localStorage.getItem('jwt'),
+        image: this.cap,
+        desc: this.desc
+      })
+      .then(response => {
+        this.captured = false
+        this.cap = ""
+        this.desc = ""
+      })
     }
   },
   mounted () {
@@ -46,7 +65,7 @@ export default {
     if (this.$refs.canvas) {
       this.canvas = this.$refs.canvas
       this.canvas.width = window.innerWidth
-      this.canvas.height = window.innerHeight - 80
+      this.canvas.height = window.innerWidth
     }
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -70,7 +89,7 @@ export default {
 .hide {
   display: none;
 }
-.capture-btn {
+.post-btns {
   position: absolute;
   left: 50%;
   bottom: 65px;
