@@ -20,3 +20,12 @@ button {
   outline: none;
   background: none;
 }
+
+.material-icons {
+  font-size: 26px;
+
+  &:hover {
+    transition: 0.2s;
+    color: #ff0000;
+  }
+}
