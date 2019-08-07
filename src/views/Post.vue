@@ -20,6 +20,7 @@ export default {
     return {
       video: {},
       canvas: {},
+      constraints: {},
       cap: "",
       captured: false
     }
@@ -27,7 +28,7 @@ export default {
   methods: {
     capture () {
       let context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width,
-      this.canvas.height)
+      this.canvas.width)
       this.cap = canvas.toDataURL("image/png")
     }
   },
@@ -35,6 +36,10 @@ export default {
     this.video = this.$refs.video
     this.video.width = window.innerWidth
     this.video.height = window.innerHeight - 80
+    this.constraints = {
+      width: window.innerWidth,
+      height: window.innerWidth
+    }
 
     if (this.$refs.canvas) {
       this.canvas = this.$refs.canvas
@@ -44,7 +49,7 @@ export default {
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({
-        video: true
+        video: this.constraints
       }).then(stream => {
         this.video.srcObject = stream
         this.video.play()
@@ -68,5 +73,10 @@ export default {
   left: 50%;
   bottom: 65px;
   transform: translateX(-50%);
+}
+
+.image {
+  width: 100%;
+  height: auto;
 }
 </style>
