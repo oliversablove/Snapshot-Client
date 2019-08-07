@@ -11,8 +11,6 @@
         <p class="timestamp">{{ timestampToDate(post.timestamp) }}</p>
       </footer>
     </article>
-
-    <button @click="logout">Logout</button>
   </main>
 </template>
 
@@ -24,14 +22,6 @@ export default {
     }
   },
   methods: {
-    logout () {
-      // supposed to work, doesn't properly
-      // this.$store.commit('logout')
-
-      // previous code (supposed to be global in store.js mutations)
-      localStorage.removeItem('jwt')
-      this.$router.push('/login')
-    },
     timestampToDate (timestamp) {
       timestamp = new Number(timestamp)
       let d = new Date(timestamp)
