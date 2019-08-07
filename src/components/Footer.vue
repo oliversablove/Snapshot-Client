@@ -4,7 +4,7 @@
     <button>Global</button>
     <button @click="goto('/newpost')">Post</button>
     <button>Notifications</button>
-    <button>Profile</button>
+    <button @click="goto('/profile')">Profile</button>
   </footer>
 </template>
 
