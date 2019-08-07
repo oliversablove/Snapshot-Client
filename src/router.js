@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import axios from 'axios'
 import store from './store'
 import Home from './views/Home.vue'
 import Post from './views/Post.vue'
@@ -52,6 +53,16 @@ let router = new Router({
 // router.onReady(() => {
 //   store.commit('isAuthenticated')
 // })
+
+router.onReady(() => {
+  axios.get(store.state.api_url + 'post/getposts')
+    .then(response => {
+      store.commit('getFeed', response.data)
+    })
+    .catch(err => {
+      if (err) throw err
+    })
+})
 
 // Checks auth to protect from getting to requiresAuth routes if not logged in (redirects to login)
 router.beforeEach((to, from, next) => {
