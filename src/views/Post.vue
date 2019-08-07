@@ -1,14 +1,12 @@
 <template>
   <main class ="view post">
     <section class="stream">
-      <video ref="video" id="video" width="100%" height="300" autoplay v-if="!captured"></video>
-      <button class="capture-btn" @click="capture">Capture</button>
+      <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'"></video>
+      <button class="capture-btn" @click="capture" :class="(!captured) ? 'show' : 'hide'">Capture</button>
+      <button class="cancel-btn" @click="cancel" :class="(captured) ? 'show' : 'hide'">Retake</button>
     </section>
     <section class="capture">
       <canvas ref="canvas" id="canvas" width="100%" height="300" :class="(captured) ? 'show' : 'hide'"></canvas>
-    </section>
-    <section class="image">
-      <img :src="cap" alt="">
     </section>
   </main>
 </template>
@@ -30,6 +28,10 @@ export default {
       let context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width,
       this.canvas.width)
       this.cap = canvas.toDataURL("image/png")
+      this.captured = true
+    },
+    cancel () {
+      this.captured = false
     }
   },
   mounted () {
