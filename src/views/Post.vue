@@ -11,7 +11,7 @@
     <section :class="(captured) ? 'show' : 'hide'">
       <canvas ref="canvas" id="canvas" width="100%" height="300"></canvas>
       <label for="desc">Caption</label>
-      <input type="text" id="desc" name="desc" v-model="desc" />
+      <input type="text" id="desc" name="desc" />
     </section>
   </main>
 </template>
