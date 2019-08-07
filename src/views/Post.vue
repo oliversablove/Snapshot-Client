@@ -96,8 +96,8 @@ export default {
   transform: translateX(-50%);
 }
 
-.image {
-  width: 100%;
-  height: auto;
-}
+// .image {
+//   width: 100%;
+//   height: auto;
+// }
 </style>
