@@ -49,7 +49,7 @@
             // should work but probably doesn't (can't test until login works)
             // this.$store.commit('login', response.data.token)
             // previous code (supposed to be in global store.js)
-            localStore.setItem('jwt', response.data.token)
+            localStorage.setItem('jwt', response.data.token)
             this.$router.push('/')
           } else {
 

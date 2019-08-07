@@ -46,7 +46,7 @@ export default {
         image: this.cap,
         desc: this.desc
       })
-      .then(response => {
+      .then(() => {
         this.captured = false
         this.cap = ""
         this.desc = ""
