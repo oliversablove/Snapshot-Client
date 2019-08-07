@@ -3,15 +3,24 @@
     <section class="stream">
       <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'"></video>
       <div class="post-btns">
-        <button class="capture-btn" @click="capture" v-if="!captured">Capture</button>
-        <button class="cancel-btn" @click="cancel" v-if="captured">Retake</button>
-        <button class="upload-btn" @click="upload" v-if="captured">Upload</button>
+        <button class="capture-btn" @click="capture" v-if="!captured">
+          <i class="material-icons icn-lg">camera</i>
+        </button>
+        <button class="cancel-btn" @click="cancel" v-if="captured">
+          <i class="material-icons icn-lg">cancel</i>
+        </button>
+        <button class="upload-btn" @click="upload" v-if="captured">
+          <i class="material-icons icn-lg">cloud_upload</i>
+        </button>
       </div>
     </section>
     <section :class="(captured) ? 'show' : 'hide'">
       <canvas ref="canvas" id="canvas" width="100%" height="300"></canvas>
-      <label for="desc">Caption</label>
-      <input type="text" id="desc" name="desc" />
+      <div class="field-group">
+        <label for="desc">Caption</label>
+        <!-- v-model needed for description to show on feed but creates warning-->
+        <input type="text" id="desc" name="desc" class="input-field" v-model="desc"/>
+      </div>
     </section>
   </main>
 </template>
@@ -81,23 +90,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
-.post-btns {
-  position: absolute;
-  left: 50%;
-  bottom: 65px;
-  transform: translateX(-50%);
-}
-
-// .image {
-//   width: 100%;
-//   height: auto;
-// }
-</style>
