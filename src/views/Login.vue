@@ -46,20 +46,25 @@
           password: this.password
         }).then(response => {
           if (response.data.auth) {
-            localStorage.setItem('jwt', response.data.token)
+            // should work but probably doesn't (can't test until login works)
+            // this.$store.commit('login', response.data.token)
+            // previous code (supposed to be in global store.js)
+            localStore.setItem('jwt', response.data.token)
             this.$router.push('/')
           } else {
-            console.log(response)
+
             if (response.data.mailError) {
               this.emailError = true
             } else {
               this.emailError = false
             }
+
             if (response.data.passError) {
               this.passError = true
             } else {
               this.passError = false
             }
+
             this.error = response.data.msg
             this.hasErrors = true
           }

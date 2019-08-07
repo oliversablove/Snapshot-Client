@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header v-if="authenticated" />
-    <router-view/>
-    <Footer v-if="authenticated"/>
+    <Header v-if="isAuthenticated" />
+    <router-view />
+    <Footer v-if="isAuthenticated"/>
   </div>
 </template>
 
@@ -16,8 +16,8 @@ export default {
     Footer
   },
   computed: {
-    authenticated () {
-      return true
+    isAuthenticated () {
+      return this.$store.state.isAuthenticated
     }
   }
 }

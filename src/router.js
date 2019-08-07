@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
@@ -37,8 +38,16 @@ let router = new Router({
   ]
 })
 
+// this is correct
+// currently prevents post-sign-in header and footer from showing. (isAuthenticated false)
+// router.onReady(() => {
+//   store.commit('isAuthenticated')
+// })
+
 // Checks auth to protect from getting to requiresAuth routes if not logged in (redirects to login)
 router.beforeEach((to, from, next) => {
+  // works but in wrong place
+  store.commit('isAuthenticated')
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem('jwt') == null) {
       next({
