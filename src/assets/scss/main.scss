@@ -61,8 +61,10 @@ body {
   }
 }
 
-/* LOGIN PAGE */
-@import 'pages/login.scss';
+/* PAGES */
+@import './pages/login.scss';
+@import './pages/register.scss';
 
-/* REGISTER PAGE */
-@import 'pages/register.scss';
+/* COMPONENTS */
+@import './components/header.scss';
+@import './components/footer.scss';

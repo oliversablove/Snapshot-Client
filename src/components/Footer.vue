@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="footer">
     <button>Home</button>
     <button>Global</button>
     <button>Post</button>
